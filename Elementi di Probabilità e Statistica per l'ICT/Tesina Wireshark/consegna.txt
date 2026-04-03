@@ -1,0 +1,4 @@
+Tesina 1: Utilizzando il software Wireshark, catturare 200 pacchetti da una interfaccia di rete a piacere del proprio pc (WiFi o Ethernet), salvare la cattura in formato CSV e calcolare media, mediana, deviazione standard e grafico delle frequenze cumulative dei tempi di interarrivo dei pacchetti. 
+Calcolare il numero totale di pacchetti ricevuti per ogni tipo di protocollo, graficando un istogramma e un grafico a torta di tale valore.
+Consegnare sia il file csv relativo alla cattura di pacchetti effettuata, che un file con i risultati richiesti (commentati) ed eventuale codice utilizzato.
+

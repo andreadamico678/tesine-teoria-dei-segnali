@@ -1,0 +1,1210 @@
+Anno accademico 2022/2023 
+1
+
+ESERCIZIO 1
+Il primo esercizio riguarda un treno di impulsi rettangolari, più speciﬁcatamente si deve andare a 
+ricostruire un segnale treno di impulsi rettangolare partendo dalle sue armoniche.
+Il segnale da ricostruire è il seguente:
+Di tale segnale si conosce:
+
+
+ (volt)
+numero di lettere del cognome
+In questo caso  (spazio incluso) e di conseguenza i valori sono:
+			 		 		 
+Con  periodo del segnale,  durata dell’impulso ed  come ampiezza dell’impulso.
+Per iniziare a risolvere il problema la prima cosa che facciamo è quella di osservare il 
+comportamento del segnale nel tempo e quindi come esso varia.
+
+Dove   è la metà della durata dell’impulso.
+Nel nostro caso il segnale da considerare è un treno di impulsi rettangolare periodico di forma:
+
+T=T0/N
+f0=1000Hz
+A=N/2
+N=
+N=8
+T=T0
+8 A=8
+2=4 T0=8T
+T0 T A
+x(t)={
+4|t|<T
+2
+0altrove}
+T
+2
+x(t)=∑A⋅π(
+t−nT0
+T )
+2
+
+Sappiamo che dato un segnale periodico qualsiasi esso può essere decomposto nella somma di 
+un termine costante di una serie di oscillazioni armoniche. Ovvero può essere sviluppato in serie 
+di Fourier e può essere riscritto secondo la formula:
+
+Questa è la formula della serie di Fourier in forma polare reale, tuttavia è molto più semplice 
+lavorare con un altro tipo di formula di Fourier che è quella complessa:
+
+Dove  rappresenta un coeﬃciente ed è uguale a  . 
+Si ha dunque per deﬁnizione che , 
+Nel nostro esercizio dunque dovremo calcolare  per ogni armonica il cui modulo ci darà 
+l’ampiezza della stessa e successivamente calcoleremo la fase. Il calcolo del  coeﬃciente  può 
+essere generalizzato attraverso una formula che calcoleremo in seguito.
+Siccome il nostro segnale è pari possiamo considerare 2 volte l’integrale da 0 a  da cui
+ . 
+Considerando che che il nostro segnale vale A da 0 a T/2 e 0 altrove  allora lo possiamo riscrivere 
+come:
+ =  =  = 
+, sapendo che  è l’inverso del periodo e quindi   e che  allora
+ =  =  =  = 
+ = .
+Con questa formula calcoleremo tutti i coeﬃcienti  tranne . Infatti:
+ =  =  =  = , con .
+x(t)=A0+2
+∞
+∑k=1
+Ak⋅cos(2πkf0t+θk)
+x(t)=
+∞
+∑k=−∞
+Xk⋅ej2πkf0t
+Xk Ak⋅ej2πf0t
+Ak=|Xk|θk∠Xk
+Xk
+xk
+T0
+2
+Xk=2
+T0∫
+T0
+2
+0
+x(t)⋅e−j2πkf0tdt
+2
+T0∫
+T
+2
+0
+A⋅cos(2πkf0t)dt2A
+T0∫
+T
+2
+0
+cos(2πkf0t)dt2A
+T0
+⋅[
+sen(2πkf0t)
+2πkf0 ]
+T
+2
+0
+2A
+T0
+⋅
+sen(2πkf0
+T
+2)
+2πkf0
+f0
+1
+T0
+T
+2=T0
+16
+2A
+T0
+⋅
+sen(2πk1
+T0
+T0
+16)
+2πkf0
+2A
+T0
+⋅
+sen(2πk1
+16)
+2πkf0
+2A
+T0
+⋅
+sen(2πk1
+16)
+2πk1
+T0
+2A
+T0
+⋅
+sen(2πk1
+16)
+2πk1
+T0
+A⋅
+sen(πk
+8)
+πk 4⋅
+sen(πk
+8)
+πk
+Xk X0
+X0=2
+T0∫
+T
+2
+0
+4⋅cos(2π0f0t)dt 2
+T0∫
+T
+2
+0
+4dt 2
+T0
+[4t]
+T
+2
+0
+2
+T0
+⋅4T
+2
+4T
+8T=1
+2 T0=8T
+3
+Con questa formula dunque calcoleremo i coeﬃcienti  il cui modulo, come prima detto, ci darà 
+l’ampiezza delle armoniche. Successivamente dobbiamo calcolare la fase e lo faremo tramite il 
+paradigma:
+Ricordando che il nostro segnale è pari allora la nostra 
+parte immaginaria è uguale a 0, conseguentemente la fase 
+può essere 0 per parte reale maggiore di 0 oppure  per 
+parte reale minore di 0.
+Applicando queste due formule calcolo rispettivamente il coe ﬃciente e conseguentemente 
+l’ampiezza e la fase di circa 33 armoniche. Di seguito viene riportata la tabella con tutti i valori 
+calcolati.
+Xk
+π
+Armonica n° Coeﬃciente Frequenza [kHz] Ampiezza [V] Fase [rad]
+0 0.5 1 0.5 0
+1 0.4872 2 0.4872 0
+2 0.45 3 0.45 0
+3 0.3921 4 0.3921 0
+4 0.3183 5 0.3183 0
+5 0.2352 6 0.2352 0
+6 0.15 7 0.15 0
+7 0.0696 8 0.0696 0
+8 0 9 0 0
+9 -0.0541 10 0.0541 3.14
+10 -0.09 11 0.09 3.14
+11 -0.1069 12 0.1069 3.14
+12 -0.1061 13 0.1061 3.14
+13 -0.0904 14 0.0904 3.14
+14 -0.0643 15 0.0643 3.14
+15 -0.0320 16 0.0320 3.14
+16 0 17 0 0
+17 0.0285 18 0.0285 0
+18 0,05 19 0,05 0
+19 0.0615 20 0.0615 0
+20 0.0635 21 0.0635 0
+Armonica n°
+4
+
+E’ molto importante ricordare che per la serie di Fourier un segnale periodico può essere 
+ricostruito tramite la somma di un termine continuo costante a frequenza 0 più 2 volte la 
+sommatoria delle sue armoniche, quindi all’interno del simulatore GNU Radio quando andremo ad 
+inserire l’ampiezza dell’armonica nel blocco signal Source dovremo prima moltiplicarla per 2.
+A livello pratico e quindi con il simulatore la struttura è basata su 5 blocchi che sono: Signal 
+Source, Add, Throttle, QT GUI Time Sink, QT GUI Frequency Sink.
+Il blocco Signal source produrrà le armoniche che verranno sommate presso il blocco Add, 
+successivamente QT GUI Frequency Sink ci mostrerà lo spettro del segnale e QT GUI Time Sink 
+ci mostrerà l’andamento del segnale nel tempo e dunque una ricostruzione del treno di impulsi 
+rettangolari.
+Il segnale ricostruito sarà somigliante a quello iniziale ma non uguale. A ﬃnché il segnale sia 
+uguale a quello iniziale servirebbero inﬁnite armoniche, ciononostante è possibile ricostruire il 
+segnale con un numero ﬁnito di armoniche a patto che questo non sia uguale a quello iniziale. Ciò 
+viene anche chiamato fenomeno di Gibbs.
+Con 33 armoniche il risultato ottenuto è questo, si avvicina al segnale treno di impulso rettangolari 
+ma non è uguale, si noti che con l’aumentare delle armoniche il segnale inizia ad avvicinarsi al suo 
+valore massimo quindi 4V e al suo valore minimo 0V. Il segnale ha frequenza 1000Hz quindi un 
+periodo di 1ms, osservando il graﬁco e facendo dei calcoli ho ottenuto che T è T0/8 e quindi 
+0,125ms.
+21 0.0560 22 0.0560 0
+22 0.0405 23 0.0405 0
+23 0.0210 24 0.0210 0
+24 0 25 0 0
+25 -0.0190 26 0.0190 3.14
+26 -0.03150 27 0.03150 3.14
+27 -0.04350 28 0.04350 3.14
+28 -0.0450 29 0.0450 3.14
+29 -0.0405 30 0.0405 3.14
+30 -0.03 31 0.03 3.14
+31 -0.0155 32 0.0155 3.14
+32 0 33 0 0
+Coeﬃciente Frequenza [kHz] Ampiezza [V] Fase [rad]Armonica n°
+5
+
+Lo spettro del segnale è quello che ci aspettiamo, vediamo che presenta degli impulsi con diversi 
+valori di Relative Gain posti alla frequenze:  eccetera, notiamo che non è presente il 
+l’impulso alla frequenza  ovvero a 8000Hz in quanto l’armonica corrispondente a tale frequenza 
+ha ampiezza 0.
+Se aumentiamo il sample Rate possiamo osservare in modo ancora più chiaro il segnale:
+E lo spettro: 
+
+0,f0,2f0,3f0
+8f0
+6
+
+ESERCIZIO 2
+Il secondo esercizio utilizza il  seguente segnale e cosi come è stato fatto per il segnale 
+precedente esso deve essere ricostruito 
+attraverso la somma delle onde armoniche.
+Di tale segnale si conosce:
+
+
+ (volt)
+numero di lettere del cognome
+In questo caso  (spazio incluso) e di 
+conseguenza i valori sono:
+Sia  la durata del segnale e  il suo periodo.
+Il  segnale  è deﬁnito da   a   e la sua ampiezza vale   da  a ,  da  a  e  
+da  a .
+Cosiccome per il primo esercizio schematizziamo il comportamento nel tempo del segnale e 
+quindi:
+
+Se si osserva meglio il segnale possiamo notare che possiamo riscriverlo come la somma di due 
+segnali treno di impulsi rettangolare, uno con durata  e uno con durata .
+
+Cosiccome il precedente esercizio dobbiamo calcolare il coeﬃciente  la cui formula è sempre:
+
+T=T0/6
+f0=1000Hz
+A=N=8
+N=
+N=8
+4T T0
+−2T 2T A
+2 −2T−TA −TTA
+2
+T2T
+x(t)=
+A
+2 −2T<t<−T
+A −T<t<T
+A
+2 T<t<2T
+4T 2T
+x(t)=(
+t
+2T)+(
+t
+4T)
+xk
+Xk=1
+T0∫
+T0
+2
+−T0
+2
+x(t)e−j2πkf0tdt
+7
+
+ = ,
+siccome la il segnale è pari allora possiamo considerare 2 volte l’integrale
+ +  =
+ +  dove
+ =  =  , 
+ =   =  - 
+
+Quindi 
++  =  +  - 
+Questa è la formula che verrà utilizzata per il calcolo del coeﬃciente  per ogni k diverso da 0 
+infatti in per tale k vale che:
+ =  = 4.
+Applicando la suddetta formula per il calcolo delle ampiezze delle armoniche, la formula nella foto 
+sopra per il calcolo delle fasi e ricordando che tutte le considerazioni fatte per il precedente 
+esercizio valgono anche per questo allora si ha che: 
+Xk=1
+T0∫
+T0
+2
+−T0
+2
+x(t)e−j2πkf0tdt 1
+T0∫
+T0
+2
+−T0
+2
+x(t)⋅cos(−j2πkf0t)dt
+2
+T0∫
+T
+0
+A⋅cos(−j2πkf0t)dt 2
+T0∫
+2T
+T
+A
+2⋅cos(−j2πkf0t)dt
+2A
+T0[
+sen(2πkf0t)
+2πkf0 ]
+T
+0
+2A
+2T0[
+sen(2πkf0t)
+2πkf0 ]
+2T
+T
+2A
+T0[
+sen(2πkf0t)
+2πkf0 ]
+T
+0
+2A
+T0
+sen(2πk1
+T0
+T0
+6)
+2πkf0
+A
+sen(πk
+3)
+πk
+2A
+2T0[
+sen(2πkf0t)
+2πkf0 ]
+2T
+T
+2A
+T0
+sen(2πk1
+T0
+T0
+3)
+2πkfo
+−
+sen(2πk1
+T0
+T0
+6)
+2πkfo
+A
+sen(2πk
+3)
+2πk
+A
+sen(πk
+3)
+2πk
+2A
+T0[
+sen(2πkf0t)
+2πkf0 ]
+T
+0
+2A
+2T0[
+sen(2πkf0t)
+2πkf0 ]
+2T
+T
+A
+sen(πk
+3)
+πk A
+sen(2πk
+3)
+2πk A
+sen(πk
+3)
+2πk
+Xk
+X0=2
+T0∫
+T
+0
+A+2
+T0∫
+2T
+T
+A
+2=2A
+T0
+[t]T
+0+2A
+2T0
+[t]2T
+T
+2A
+T0
+⋅T0
+6+2A
+2T0
+⋅T0
+6
+8
+Ad esempio per il calcolo del primo coeﬃciente la formula è:
+	  +  -  = 2.20
+Per il secondo quindi per l’armonica a 2kHz
+	  +  -  = 0
+Cosi via per tutte le altre armoniche che abbiamo trovato.
+A
+sen(π
+3)
+π A
+sen(2π
+3)
+2π A
+sen(π
+3)
+2π
+A
+sen(2π
+3)
+2π A
+sen(4π
+3)
+4π A
+sen(2π
+3)
+4π
+Armonica n° Coeﬃciente Frequenza [kHz] Ampiezza [V] Fase [rad]
+0 4 0 4 0
+1 2.20 1 4.40 0
+2 0 2 0 0
+3 0 3 0 0
+4 0 4 0 0
+5 -0.44 5 0.88 3.14
+6 0 6 0 0
+7 0.31 7 0.62 0
+8 0 8 0 0
+9 0 9 0 0
+10 0 10 0 0
+11 -0.2000 11 0.4000 3.14
+12 0 12 0 0
+13 0.16 13 0.32 0
+9
+Inserendo tutti questi valori in Gnu Radio otteniamo che il segnale ricostruito con le 13 armoniche 
+è quasi uguale a quello originale con valore medio pari a 4 come prima calcolato, di ampiezza 8 e 
+con periodo pari a .
+
+
+Lo spettro delle frequenze di questo segnale presenta degli impulsi centrati alle varie frequenza 
+con un determinato valore di Relative Gain. Come ci si aspettava si nota che in molte frequenze 
+l’impulso è nullo e ciò è dovuto al fatto che molti coeﬃcienti sono pari a 0.
+T0=6T
+10
+
+ESERCIZIO 3
+Il terzo esercizio come gli altri due consiste nella ricostruzione di un segnale periodico utilizzando 
+le sue armoniche.
+Il segnale da ricostruire è il seguente, è un onda quadra di cui conosciamo:
+	 		  (volt)
+Dove N è il numero di lettere del mio cognome, nel mio caso N = 7. Conseguentemente vale che:
+	 		  (volt)
+Notiamo che per il segnale il periodo è uguale a  e nello speciﬁco il segnale vale:
+				 
+Cosiccome il precedente esercizio dobbiamo calcolare il coeﬃciente  la cui formula è sempre:
+
+Siccome il segnale che tratteremo è un segnale pari possiamo considerare due volte l’integrale
+
+T=T0
+N f0=1000Hz A=N
+T=T0
+7 f0=1000Hz A=7
+7T
+x(t)=
+A
+2 −T
+2<t<T
+2
+−A
+2 −T
+2<t<−7T
+2
+−A
+2
+T
+2<t<7T
+2
+xk
+Xk=1
+T0∫
+T0
+2
+−T0
+2
+x(t)e−j2πkf0tdt
+Xk=2
+T0∫
+T0
+2
+0
+x(t)e−j2πkf0tdt
+11
+
+Nel nostro caso vale che:
+ + ,  sia   =  = .
+Quindi vale, uscendo rispettivamente   e - dall’integrale:
+ - ;
+ 
+- 
+Conoscendo che  allora:
+ ,	  ,  	 
+Conseguentemente vale che:
+- 
+Dopo aver ridotto il  con  al denominatore, e aver sempliﬁcato sempre il  al 
+numeratore si ha che: 
+-  = 
+ -  +  =  -  .
+Quindi la formula utile per il calcolo dei coeﬃcienti è: 
+ -  .
+2
+T0∫
+T
+2
+0
+A
+2cos(2πkf0t)dt 2
+T0∫
+7T
+2
+T
+2
+−A
+2cos(2πkf0t)dt A
+2
+7
+23,5
+A
+2
+A
+2
+7
+T0∫
+T
+2
+0
+cos(2πkf0t)dt7
+T0∫
+7T
+2
+T
+2
+cos(2πkf0t)dt
+7
+T0[
+sen(2πkf0t)
+2πkf0 ]
+T
+2
+0
+7
+T0[
+sen(2πkf0t)
+2πkf0 ]
+7T
+2
+T
+2
+T=T0
+7
+T0=7T T
+2=T0
+14
+7T
+2=T0
+2
+7
+T0
+sen(2πk1
+T0
+T0
+14)
+2πkf0
+−0 7
+T0
+sen(2πk1
+T0
+T0
+2)
+2πkf0
+−
+sen(2πk1
+T0
+T0
+14)
+2πkf0
+T0 f0=1
+T0
+T0
+7
+sen(2πk
+14)
+2πk 7
+sen(2πk
+2)
+2πk −
+sen(2πk
+14)
+2πk
+7sen(πk
+7)
+2πk
+7sen(πk)
+2πk
+7sen(πk
+7)
+2πk
+7sen(πk
+7)
+πk
+7sen(πk)
+2πk
+7sen(πk
+7)
+πk
+7sen(πk)
+2πk
+12
+Ad esempio il primo coeﬃciente dopo  è calcolato
+ -  = 0.96
+Il secondo: 
+ -  =0.87
+Cosi facciamo per trovare i coeﬃcienti di tutte le altre armoniche che ci interessano.
+In questo caso calcoliamo 29 armoniche tra cui anche quella costante a frequenza 0.
+X0
+7sen(π
+7)
+π
+7sen(π)
+2π
+7sen(2π
+7)
+2π
+7sen(2π)
+4π
+Armonica n° Coeﬃciente Frequenza [kHz] Ampiezza [V] Fase [rad]
+0 -2.5 0 -2.5 0
+1 0.96 1 1.92 0
+2 0.87 2 1.74 0
+3 0.72 3 1.44 0
+4 0.54 4 1.08 0
+5 0.34 5 0.68 0
+6 0.16 6 0.32 0
+7 0 7 0 0
+8 -0.12 8 0.24 3.14
+9 -0.19 9 0.38 3.14
+10 -0.21 10 0.42 3.14
+11 -0.1974 11 0.3948 3.14
+12 -0.145 12 0.29 3.14
+13 -0.07 13 0.14 3.14
+14 0 14 0 0
+15 0.064 15 0.128 0
+16 0.108 16 0.216 0
+17 0.127 17 0.254 0
+18 0.120 18 0.24 0
+19 0.091 19 0.182 0
+20 0.048 20 0.096 0
+Armonica n°
+13
+Ricordiamo che l’ampiezza è il valore che va inserito in GnuRadio ed è il doppio del coeﬃciente.
+Il coeﬃciente  lo calcoliamo attraverso: 
+  + , ricordando che  è uguale a 3.5 vale che:
+ -  =  =  = 
+Con questi valori di coeﬃcienti e di fasi per ogni armonica abbiamo che il segnale ottenuto su 
+GnuRadio è: 
+Da questa foto possiamo notare che il segnale ha periodo di 1ms, infatti si ripete periodicamente 
+dopo tale tempo, osserviamo che rispetta l’ampiezza del segnale da ricostruire, infatti esso varia 
+tra -3.5 e 3.5 e quindi difatti l’ampiezza è 7 volt come ci si aspettava.
+21 0 21 0 0
+22 -0.04 22 0.08 3.14
+23 -0.075 23 0.15 3.14
+24 -0.090 24 0.18 3.14
+25 -0.086 25 0.172 3.14
+26 -0.067 26 0.134 3.14
+27 -0.035 27 0.07 3.14
+28 0 28 0 0
+Coeﬃciente Frequenza [kHz] Ampiezza [V] Fase [rad]Armonica n°
+X0
+X0=2
+T0∫
+T
+2
+0
+A
+2dt 2
+T0∫
+7T
+2
+T
+2
+−A
+2dt A
+2
+7
+T0
+[t]
+T0
+14
+0
+7
+T0
+[t]
+T0
+2
+T0
+14
+7
+T0
+⋅T0
+14−7
+T0(
+T0
+2−T0
+14)
+1
+2−3−5
+2
+14
+
+Lo spettro delle frequenze del segnale:
+15
+
+ESERCIZIO 3
+Il terzo esercizio consiste nel calcolo attraverso la teoria della potenza di un segnale, 
+successivamente tale potenza deve essere veriﬁcata su gnu radio ed inﬁne il si deve calcolare la 
+banda di un ﬁltro passa basso tale per cui la potenza del segnale ﬁltrato sia una determinata 
+percentuale della potenza del segnale in ingresso.
+Il primo segnale che viene considerato è il seguente: 
+Di questo segnale si conoscono: 
+	 
+Il valore dell’ampiezza dipenda dalla lunghezza del cognome, quindi in questo caso è pari a 7.
+Dal valore del periodo ci possiamo ricavare la frequenza del segnale che è pari a:	 	 	
+					
+					 
+Si inizia calcolando, attraverso la teoria, la potenza del segnale. Ciò lo facciamo con la formula: 
+
+T0=2ms A=7mv
+1
+T0
+= 1
+2*10−3=500
+1
+T0∫
+T0
+2
+−T0
+2
+|x(t)|2dx
+16
+
+Nel nostro caso dobbiamo calcolare quanto vale il segnale in certo istante, notiamo che si tratta di 
+un segnale triangolare quindi ci basta calcolare le due rette che lo compongono.
+La prima retta è quella che passa per i punti:  ed esattamente è uguale a:
+.
+La seconda retta è quella che passa per i punti:  ed esattamente è uguale a:
+.
+Per il calcolo della potenza possiamo anche utilizzare una sola di queste due rette 
+presupponendo di moltiplicare per due l’integrale.
+Da   allora si ha  tale integrale vale:
+ 
+ , utilizzando un prodotto notevole si ha che
+ =   = 
+ = .
+Una volta calcolata la potenza del segnale allora si graﬁca il segnale su gnu radio.
+In questo caso il segnale da comporre lo si può vedere come un segnale triangolare di ampiezza 
+pari a 7 millvolt meno un segnale costante di ampiezza -3.5 millvolt. Siccome il segnale a t = 0 
+vale -0.0035 allora il segnale triangolare è traslato di -pi/2.
+
+(0,−A
+2),(T0
+2,A)
+y=10.5x−0.0035
+(T0
+2,A),(T0,−A
+2)
+y=−10.5x+0.0175
+1
+T0∫
+T0
+2
+−T0
+2
+|x(t)|2dx 2
+0.002∫
+0.001
+0
+|10.5x−0.0035|2dx
+2
+0.002∫
+0.001
+0
+(10.5x−0.0035)2dx
+2
+0.002∫
+0.001
+0
+441
+4x2−147
+2000x+(
+7
+2000)
+2 2
+0.002∫
+0.001
+0
+147
+4x3−147
+4000x2+(
+49x
+2000)
+2
+0.002*(
+147
+4*109− 147
+4000*10002+0.049
+20002)1.225*10−5=12.25*10−6
+AΔ
+t−π
+2
+T0
+2
+−A
+2
+17
+Lo spettro delle ampiezze di tale segnale su gnu radio è il seguente:
+Lo spettro delle frequenze di tale segnale su gnu radio è il seguente:
+Successivamente si deve calcolare la banda di frequenza di un ﬁltro passa basso tale per cui la 
+potenza in uscita sia almeno il 98% della potenza in entrata.
+Sapendo che la potenza in entrata è di  allora la potenza in uscita 
+dopo il ﬁltraggio deve essere almeno di .
+Aﬃnché possiamo calcolare la banda del ﬁltro utilizziamo la trasformata di fuorier e le formule di 
+poisson per calcolare i Cn. Calcoleremo i Cn aﬃnché la potenza non sarà quella desiderata e 
+successivamente sceglieremo una banda di frequenze che faccia passare tutte quelle armoniche.
+La trasformata del nostro segnale è uguale a:
+
+Utilizziamo le formule di poisson secondo le quali:
+Lo spettro delle frequenze di un segnale periodico è la sommatoria di tanti impulsi a frequenza nf0 
+di ampiezza Cn.
+1.225*10−5=12.25*10−6
+12.01*10−6
+A⋅T0
+2⋅sinc(f⋅T0
+2)2e−j2πfT0
+2−A
+2δ(f)
+18
+
+Dobbiamo calcolare Cn ﬁno ad arrivare alla potenza desiderata, difatti la potenza può essere 
+anche calcolata come il modulo quadro dei coeﬃcienti di Fourier.
+Per farlo utilizziamo la formula sopracitata secondo la quale si ottiene che i nostri cn sono calcolo 
+come:
+ da cui sempliﬁcando si ha:
+				
+
+Per n = 0 
+ =  che equivale al valore medio del segnale.
+Per n = 1
+ =  .
+Conseguentemente la potenza sarà uguale a  diviso 2.
+In questo caso è uguale a  che è quasi la potenza che abbiamo 
+trovato prima.
+Questa è la potenza dell’armonica a 500Hz. Siccome la banda del ﬁltro deve far passare il 98% 
+della potenza della potenza in ingresso che quindi era  allora basta far passare le 
+frequenze che vanno poco sopra i 500Hz e ﬁltrare tutte le altre.
+Con un ﬁltraggio a 500Hz questo è lo spettro delle ampiezze 
+1
+T0
+⋅A⋅T0
+2⋅sinc2(nf0⋅T0
+2)e−j2πnf0
+T0
+2−A
+2δ(f)
+Cn=A
+2⋅sinc2(n
+2)e−j2πn
+2−A
+2δ(nf0)
+C0=A
+2⋅sinc2(0
+2)e−j2π0
+2−A
+2δ(0)A
+2−A
+2=0
+C1=A
+2⋅(
+sin(nπ
+2)
+nπ
+2 )
+2
+e−j2π1
+2−A
+2δ(500)−0.00492
+|C1|2
+24,30⋅10−6
+2 =12.15⋅10−6
+12.01*10−6
+19
+
+Con un ﬁltraggio a 500Hz questo è lo spettro delle frequenze.
+Per calcolare in decibel l’attenuazione ottenuta utilizziamo la formula:
+
+Nel nostro caso allora l’attenuazione a sarà:
+ = .
+ESERCIZIO 3.1
+Si deve calcolare la banda di un ﬁltro passa basso tale che la potenza in uscita sia almeno il 99% 
+della potenza in entrata.
+La potenza del segnale in ingresso è come prima, . Quindi il 99% di questa è pari a 
+
+La potenza ottenuta utilizzando i primi due coeﬃcienti di Fourier è uguale a . Difatti si 
+può utilizzare anche qui una frequenza più o meno vicina a 500Hz in modo tale da ottenere 
+almeno il 99% della potenza in ingresso.
+Gli spettri di ampiezza e di frequenza sono pressoché uguali a quelli dell’esercizio precedente.
+Per quanto riguarda l’attenuazione del segnale in uscita allora utilizzeremo la formula:
+ = . E come si voleva dimostrare vi è un 
+attenuazione più piccola.
+a=10⋅log10(
+|Pout|
+|Pin|)
+a=10⋅log10(
+|12.01*10−6|
+|12.25*10−6|)−0.085dB
+12.25*10−6
+12.13*10−6
+12.15⋅10−6
+a=10⋅log10(
+|12.13*10−6|
+|12.25*10−6|) −0.042dB
+20
+
+ESERCIZIO 4
+Il quarto esercizio è uguale al terzo ma si diﬀerenzia per il tipo di segnale trattato. Il segnale che 
+viene trattato è il seguente: 
+
+In questo segnale l’ampiezza A vale  e il periodo  è uguale a . Questo segnale lo 
+possiamo vedere come un segnale triangolare di ampiezza A/2 + un rect di ampiezza A/2 traslato 
+di .
+Dal valore del periodo ci possiamo ricavare la frequenza del segnale che è pari a:	 	 	
+					
+					 
+Per la calcolare la potenza in modo teorico utilizziamo anche qui la formula:
+
+In questo caso io decido di calcolarmi le rette del segnale nell’intervallo da 0 a  e poi considero 
+due volte l’integrale.
+La prima retta è quella che passa per i punti (0, 0,007), e (0.0005, 0.00525).
+Tale retta è uguale a  .
+La seconda retta è quella che passa per i punti (0.0005, 0.00525) e (0.002, 0).
+Tale retta vale: .
+7mv T0 2ms
+−π
+2
+1
+T0
+= 1
+2*10−3=500
+1
+T0∫
+T0
+2
+−T0
+2
+|x(t)|2dx
+T0
+2
+−3.5x+0.007
+−3.5x+0.0035
+21
+
+Per calcolare la potenza utilizzo la suddetta formula e quindi devo risolvere gli integrali:
+				
+
+Il primo integrale vale:
+, convertiamo lo 0.007 in frazione e attraverso un prodotto 
+notevole si ha che l’integrale diventa: 
+, quindi svolgendo singolarmente ogni integrale si ha 
+che:
+ = . Una volta 
+calcolata questa ultima parte tra 0 e 0.0005 si ottiene che l’integrale è uguale a . 
+Questo lo moltiplico per due quindi vale: .
+Il secondo integrale vale:
+
+convertiamo lo 0.0035 in frazione e attraverso un prodotto notevole si ha che l’integrale diventa: 
+, quindi svolgendo singolarmente ogni integrale si ha 
+che:
+.  Una volta calcolata questa ultima parte tra 0.0005 e 
+0.0001 si ottiene che l’integrale è uguale a . Questo lo moltiplico per due quindi 
+vale: .
+A questo punto faccio la somma di questi due integrali che viene: 
+			  +  = 
+Per la formula della potenza devo dividere questa quantità per  quindi ho che la potenza è:
+.
+Questa è uguale a quella su gnuradio. 
+1
+0.002(2∫
+0.0005
+0
+|−3.5x+0.007|2dx+2∫
+0.001
+0.0005
+|−3.5x+0.0035|2dx)
+2∫
+0.0005
+0
+|−3.5x+0.007|2dx
+2∫
+0.0005
+0 (
+7
+1000)
+2
+−49
+1000x+49
+4x2dx
+2∫
+0.0005
+0 (
+7
+1000)
+2
+−49
+1000x+49
+4x2dx 2*(
+49x
+10002−49
+2000x2+49
+12x3
+)
+1.888*10−8
+3.777*10−8
+2∫
+0.001
+0.0005
+|−3.5x+0.0035|2dx
+2∫
+0.001
+0.0005(
+7
+2000)
+2
+−49
+2000x+49
+4x2dx
+2∫
+0.001
+0.0005
+7
+20002−49
+2000x2+49
+12x3dx
+5.104*10−10
+1.020*10−9
+3.777*10−8 1.020*10−9 3.872*10−8
+T0
+3.872*10−8
+0.002 =19.36*10−6
+22
+Questo rappresenta lo spettro delle ampiezze del segnale.
+Questo rappresenta lo spettro delle frequenze del segnale.
+Successivamente dobbiamo trovare una banda di frequenze tali per cui la potenza del segnale in 
+uscita da un ﬁltro passa basso sia almeno il 61% del segnale in ingresso.
+Siccome sappiamo che la potenza del segnale è  allora il 61% di questa sarà:
+.
+Per poter calcolare la banda di frequenze da far passare e quelle da ﬁltrare utilizzo le formule di 
+poisson, trovo i coeﬃcienti di Fourier, ne faccio il modulo quadro aﬃnché non trovo la potenza 
+desiderata, a quel punto faccio passare tutte le relative armoniche.
+19.36*10−6
+11.81*10−6
+23
+
+Come sopra si calcola la trasformata del segnale che sarà:
+ 
+  = 
+Per cui la formula dei Cn è uguale a:
+
+Per cui: 
+ =  = 0.00525.
+Di cui il modulo quadro di questo è uguale a 
+Questo lo dividiamo per due quindi .
+Osserviamo dunque che già con l’armonica a frequenza 0 la potenza è maggiore sia del 61 che 
+del 68 per cento della potenza in ingresso.
+Quindi aﬃnché la potenza in uscita sia almeno il 61 per cento della potenza in ingresso basta far 
+passare l’armonica a frequenza zero e ﬁltrare tutte le altre. Quindi basta prendere una frequenza 
+che vada da 0 a 500. Su gnu radio ad esempio con una frequenza pari a 450 Hz si ha una potenza 
+ﬁltrata pari a  che già è maggiore del 61%.
+Con una frequenza di taglio di 490 Hz questo è lo spettro delle ampiezze del segnale
+0.0035Δt
+T0
+2
++0.0035π
+t−pi
+2
+T0
+⇒
+0.0035*0.001sinc2
+(
+f
+0.001)+0.0035*0.002sinc(
+f
+0.002)e−j2πfπ
+2
+0.0035*0.001sinc2
+(
+nf0
+0.001)+0.0035*0.002sinc(
+nf0
+0.002)e−j2πnf0π
+2
+C0 0.0035*0.001sinc2
+(
+0
+0.001)+0.0035*0.002sinc(
+0
+0.002)e−j2π0π
+2
+|0.00525|2=27.5*10−6
+13.75*10−6
+12.25*10−6
+24
+
+Questo è lo spettro delle frequenze.
+L’attenuazione del segnale dovuta al suo ﬁltraggio la calcoliamo come:
+
+ = .
+ESERCIZIO 4.1
+Sappiamo che il 68% della potenza in ingresso al ﬁltro è uguale a: 
+Vediamo che il 68% della potenza è molto vicino alla potenza che abbiamo calcolato con un il 
+primo coeﬃciente, quindi ci servirà far passare tutte le frequenze  minori di 500, quindi si 
+potrebbe optare per la frequenza 499.9 la quale permette di ottenere il massimo dall’ armonica a 
+frequenza 0 ma al contempo ﬁltra l’armonica a frequenza 500.
+Con la frequenza 499.9 si ha che la potenza in uscita è uguale a:  e questo viene 
+anche confermato da gnuradio.
+Questo è lo spettro delle frequenze con una frequenza di taglio di 499.9.
+a=10⋅log10(
+|11.81*10−6|
+|19.36*10−6|)−2.146dB
+13.16*10−6
+13.17*10−6
+25
+
+Questo è lo spettro delle ampiezza del segnale.
+Siccome il segnale da ﬁltrare è abbastanza complesso servirebbero molte più armoniche aﬃnché 
+il suo spettro delle ampiezze lo mostri più preciso, tuttavia a noi interessa la potenza e dunque il 
+segnale sopra rappresenta quel segnale con una potenza uguale al 68% di quella in ingresso.
+Per quanto riguarda l’attenuazione del segnale la calcoliamo come:
+ = .
+
+a=10⋅log10(
+|13.16*10−6|
+|19.36*10−6|)−1.676dB
+26
+

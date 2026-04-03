@@ -1,0 +1,51 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\geometry{a4paper, margin=2cm}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{csvsimple}
+
+\title{
+    \textbf{Elementi di Probabilità e Statistica per l'ICT \\
+    Tesina Numero 1: Analisi di Rete con Wireshark
+}}
+
+\author{Andrea D'Amico \\ \small{Ingegneria Informatica (L-8) | Università degli studi di Catania}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\input{../../repo_info.tex}
+
+\tableofcontents
+\newpage
+
+\section{Introduzione all'Analisi dei Pacchetti}
+% Utilizzando il software Wireshark, catturare 200 pacchetti ...
+In questa tesina si analizza il traffico di rete generato su una specifica interfaccia. Sono stati catturati e salvati mediante Wireshark 200 pacchetti, dai quali sono stati estratti i dati necessari per condurre le misurazioni richieste per il corso.
+
+\section{Tempi di Interarrivo e Statistiche Descrittive}
+% ... calcolare media, mediana, deviazione standard ...
+
+\subsection{Istogramma e Frequenze Cumulative}
+% ... grafico delle frequenze cumulative dei tempi di interarrivo dei pacchetti
+
+\newpage
+\section{Classificazione per Tipo di Protocollo}
+% Calcolare il numero totale di pacchetti ricevuti per ogni tipo di protocollo
+
+\subsection{Istogramma dei Protocolli}
+% ... graficando un istogramma
+
+\subsection{Grafico a Torta della Distribuzione Percentuale}
+% ... e un grafico a torta di tale valore
+
+\end{document}
