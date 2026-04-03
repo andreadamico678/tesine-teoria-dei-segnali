@@ -1,5 +1,5 @@
 % !TEX root = main.tex
-In virtù della linearità della serie di Fourier, calcoliamo i coefficienti delle due componenti base, $y_1(t)$ e $y_2(t)$, considerandole su un singolo periodo. Il segnale generale è denominato $y(t)$, per cui indicheremo i suoi coefficienti esponenziali con la forma polare $Y_k \triangleq A_k e^{j\vartheta_k}$:
+Sfruttando la linearità della Serie di Fourier, calcoliamo i coefficienti $Y_k$ sommando le due componenti base $y_1(t)$ e $y_2(t)$ su un singolo periodo $T_0$:
 
 \[ Y_k = \frac{1}{T_0} \left. \mathcal{F}\{y_T(t)\} \right|_{f=\frac{k}{T_0}} \]
 dove $y_T(t)$ è il segnale limitato a un singolo periodo, con $\mathcal{F}\{y_T(t)\} = \mathcal{F}\{y_1(t)\} + \mathcal{F}\{y_2(t)\}$.
@@ -22,13 +22,11 @@ Passando alle frequenze discrete $f = \frac{k}{T_0}$ e ricordando di dividere pe
 \end{equation}
 
 \subsection{Analisi dei Coefficienti}
-
-L'espressione \eqref{eq:fourier_coeffs} descrive lo spettro del segnale. Adesso la analizziamo nei vari casi per poter tracciare gli spettri dell'ampiezza $|Y_k|$ e della fase $\vartheta_k$.
+L'espressione \eqref{eq:fourier_coeffs} descrive lo spettro del segnale. Ne analizziamo l'andamento per tracciare gli spettri dell'ampiezza $|Y_k|$ e della fase $\vartheta_k$.
 
 \paragraph{Componente Continua ($k=0$):}
 Sfruttando il fatto che $\operatorname{sinc}(0) = 1$:
-\[ Y_0 = \frac{A}{2} + \frac{A}{4} = \frac{3}{4} A \]
-Sapendo che $A = 3 \text{ V}$, calcoliamo subito il valore medio del segnale che risulterà $Y_0 = 2.25 \text{ V}$.
+\[ Y_0 = \frac{A}{2} + \frac{A}{4} = \frac{3}{4} A = 2.25 \text{ V} \]
 
 \paragraph{Armoniche Pari ($k = 2m \neq 0$):}
 Il numeratore delle funzioni $\operatorname{sinc}(k/2)$ contiene il termine $\sin(\pi k / 2)$, che vale sempre zero ogniqualvolta $k$ è un numero pari. Di conseguenza, tutte le armoniche pari si annullano:
@@ -36,11 +34,9 @@ Il numeratore delle funzioni $\operatorname{sinc}(k/2)$ contiene il termine $\si
 
 \paragraph{Armoniche Dispari ($k = 2m + 1$):}
 Per gli indici dispari, possiamo espandere la funzione $\operatorname{sinc}$ limitandoci a calcolare il seno a numeratore:
-\[ Y_k = \frac{A}{2} \left( \frac{\sin(k\pi/2)}{k\pi/2} \right)^2 + \frac{A}{4} \left( \frac{\sin(k\pi/2)}{k\pi/2} \right) \]
-In particolare, sappiamo per certo che $\sin^2\left(k\frac{\pi}{2}\right) = 1$ quando $k$ è dispari, quindi l'equazione si semplifica e si ottiene:
 \begin{equation}
     Y_{2m+1} = \frac{2A}{\pi^2 k^2} + \frac{A}{2 \pi k} \sin\left(k \frac{\pi}{2}\right)
 \end{equation}
 
 \vspace{0.5cm}
-Questa analisi conferma quanto ci aspettavamo dai concetti iniziali: siccome $y(t)$ è una funzione pari, \textbf{i coefficienti $Y_k$ sono interamente reali} ($\Im\{Y_k\}=0$). Sulla base di ciò, quando riporteremo $Y_k$ nella forma polare $A_k e^{j\vartheta_k}$, lo spettro di fase $\vartheta_k$ assumerà solo due valori possibili: sarà $0$ se il corrispondente coefficiente di Fourier ammetterà esito positivo ($Y_k > 0$), oppure oscillerà a $\pm \pi$ quando uscirà un esito negativo ($Y_k < 0$).
+Questa analisi conferma che i coefficienti $Y_k$ sono interamente reali ($\Im\{Y_k\}=0$), pertanto lo spettro di fase $\vartheta_k$ assume solo i valori $0$ o $\pm \pi$ in base al segno algebrico del coefficiente calcolato.

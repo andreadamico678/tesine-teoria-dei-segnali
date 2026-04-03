@@ -1,1 +1,37 @@
-% Inserisci qui il contenuto per questo capitolo
+% !TEX root = main.tex
+I coefficienti $Y_k$ permettono di ricostruire il segnale nel tempo tramite la forma polare reale:
+\begin{equation}
+    y_{rec}(t) = Y_0 + 2 \sum_{k=1}^{N} |Y_k| \cos(2\pi k f_0 t + \vartheta_k)
+\end{equation}
+Per l'analisi software, limitiamo la serie alle prime armoniche ($k=0, 1, 3, 5, 7, 9$). In corrispondenza dei salti bruschi, il segnale ricostruito rispetta le condizioni di Dirichlet, convergendo al valor medio del salto, ma introducendo oscillazioni locali (fenomeno di Gibbs) con un errore di picco costante di circa il 9\%.
+
+\begin{center}
+    \begin{tabular}{ccc}
+        \hline
+        $k$ & Frequenza [kHz] & Ampiezza $2|Y_k|$ [V] \\
+        \hline
+        1   & 6               & $+2.1708$             \\
+        3   & 18              & $-0.1833$             \\
+        5   & 30              & $+0.2396$             \\
+        7   & 42              & $-0.1116$             \\
+        9   & 54              & $+0.1211$             \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Note implementative in GNU Radio}
+Il segnale ricostruito è stato simulato su \textit{GNU Radio} sommando le sorgenti sinusoidali a una costante DC ($2.25$ V). Per stabilizzare la visualizzazione nel blocco \texttt{QT GUI Time Sink} ed evitare che la traccia scorra continuamente a schermo (\textit{free run}), è stato configurato un trigger di tipo \texttt{Normal} (in alternativa si può usare \texttt{Auto}) con un livello di soglia impostato a $2.25$ V (pari alla componente media). Questo permette di agganciare il fronte di salita della ricostruzione rendendo la simulazione leggibile.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\textwidth]{media/gnuradio_flowgraph.png}
+    \caption{Flowgraph in GNU Radio per la sintesi del segnale $y_{rec}(t)$}
+    \label{fig:gnuradio_flowgraph}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{media/gnuradio_output.png}
+    \caption{Output del QT GUI Time Sink con trigger attivo}
+    \label{fig:gnuradio_output}
+\end{figure}
