@@ -4,9 +4,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-# Parametri
-csv_path = 'capture.csv'
-output_dir = '.'
+# Parametri relativi rispetto alla posizione dello script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_root = os.path.dirname(script_dir) # Cartella Tesina Wireshark
+csv_path = os.path.join(base_root, "capture.csv")
+output_dir = base_root
 
 # Lettura dati
 times = []
@@ -46,7 +48,7 @@ plt.title('Frequenza Cumulativa (CDF) dei Tempi di Interarrivo', fontsize=14, fo
 plt.xlabel('Tempo di Interarrivo (s)', fontsize=12)
 plt.ylabel('Probabilità Cumulativa', fontsize=12)
 plt.grid(True, linestyle='--', alpha=0.7)
-plt.savefig('cdf_interarrival.png', dpi=300, bbox_inches='tight')
+plt.savefig(os.path.join(output_dir, 'cdf_interarrival.png'), dpi=300, bbox_inches='tight')
 plt.close()
 
 # 4. Generazione Istogramma Protocolli
@@ -57,7 +59,7 @@ plt.xlabel('Protocollo', fontsize=12)
 plt.ylabel('Numero di Pacchetti', fontsize=12)
 plt.xticks(rotation=45)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
-plt.savefig('protocol_histogram.png', dpi=300, bbox_inches='tight')
+plt.savefig(os.path.join(output_dir, 'protocol_histogram.png'), dpi=300, bbox_inches='tight')
 plt.close()
 
 # 5. Generazione Grafico a Torta Protocolli
@@ -74,10 +76,10 @@ else:
 colors = ['#ff9999','#66b3ff','#99ff99','#ffcc99','#c2c2f0','#ffb3e6', '#c4fb6d']
 plt.pie(pie_data.values(), labels=pie_data.keys(), autopct='%1.1f%%', startangle=140, colors=colors, wedgeprops={'edgecolor': 'white'})
 plt.title('Distribuzione Percentuale dei Protocolli', fontsize=14, fontweight='bold')
-plt.savefig('protocol_pie.png', dpi=300, bbox_inches='tight')
+plt.savefig(os.path.join(output_dir, 'protocol_pie.png'), dpi=300, bbox_inches='tight')
 plt.close()
 
-# Stampa dei risultati per catturarli nel log
+# Stampa dei risultati
 print(f"MEAN_IAT: {mean_iat:.6f}")
 print(f"MEDIAN_IAT: {median_iat:.6f}")
 print(f"STDEV_IAT: {stdev_iat:.6f}")
