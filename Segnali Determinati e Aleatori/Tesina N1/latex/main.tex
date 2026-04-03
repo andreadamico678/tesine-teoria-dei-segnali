@@ -1,0 +1,225 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{geometry}
+\geometry{a4paper, margin=2cm}
+
+\title{
+    \textbf{Teoria dei Segnali (Modulo: Segnali Determinati e Aleatori)
+    : Tesina Numero 1
+}}
+
+\author{Andrea D'Amico \\ \small{Ingegneria Informatica (L-8) | Università degli studi di Catania}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduzione e Modello Analitico}
+
+L'obiettivo di questa relazione è l'analisi in frequenza e la successiva sintesi del segnale periodico $y(t)$ assegnato. Al fine di semplificare il calcolo dei coefficienti dello sviluppo in serie di Fourier, risulta conveniente sfruttare la linearità dell'operatore trasformata e scomporre il segnale in componenti elementari note.
+
+Osservando l'andamento del segnale in un singolo periodo $T_0$, e centrando opportunamente l'asse dei tempi, è possibile modellare $y(t)$ come la sovrapposizione lineare di $y_1(t)$ (segnale $\Delta$) e $y_2(t)$ (segnale $\Pi$).
+
+Questo è il modo più efficiente di calcolare le caratteristiche del segnale, in quanto le proprietà delle funzioni $\Delta$ e $\Pi$ sono già note.
+
+I parametri calcolati a partire dal numero di lettere del cognome ("Damico" $\rightarrow N=6$) sono:
+\begin{itemize}
+    \item $A = \lceil \frac{N}{2} \rceil = \lceil \frac{6}{2} \rceil = 3 \text{ V}$
+    \item $T_0 = \frac{1}{N} \text{ ms} = \frac{1}{6} \text{ ms}$
+\end{itemize}
+
+L'espressione analitica nel periodo $t \in \left[-\frac{T_0}{2}, \frac{T_0}{2}\right]$ risulta essere:
+\begin{equation}
+    y(t) = y_1(t) + y_2(t) = A \cdot \Delta\left(\frac{t}{T_0/2}\right) + \frac{A}{2} \Pi\left(\frac{t}{T_0/2}\right)
+\end{equation}
+
+\subsection{Sfruttamento delle Simmetrie}
+Una proprietà fondamentale di questa scomposizione è che sia $\Delta(\cdot)$ che $\Pi(\cdot)$ sono \textbf{funzioni pari}. Di conseguenza, la loro somma $y(t)$ è una funzione pari. Questa simmetria garantisce, per il teorema di Fourier, che la serie sarà composta unicamente da termini cosinusoidali (parte immaginaria nulla).
+
+\newpage
+
+\subsection{Rappresentazione Grafica delle Componenti}
+Di seguito viene illustrata la scomposizione grafica del segnale (con valori normalizzati $A=3, T_0=4$ per chiarezza visiva), mostrando prima le singole componenti e infine il segnale risultante.
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=1.1\textwidth,
+    height=4cm,
+    axis lines=middle,
+    xmin=-3, xmax=3,
+    ymin=-0.5, ymax=3.5,
+    xlabel={$t$},
+    ylabel={$y_1(t)$},
+    grid=both,
+    grid style={dashed, gray!30},
+    thick,
+    title={Componente $\Delta$}
+]
+\addplot[
+    domain=-2:2, 
+    samples=100, 
+    color=blue
+]
+{3 * max(0, 1 - abs(x)/2)};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=1.1\textwidth,
+    height=4cm,
+    axis lines=middle,
+    xmin=-3, xmax=3,
+    ymin=-0.5, ymax=2.0,
+    xlabel={$t$},
+    ylabel={$y_2(t)$},
+    grid=both,
+    grid style={dashed, gray!30},
+    thick,
+    title={Componente $\Pi$}
+]
+\addplot[
+    domain=-2:2, 
+    samples=200, 
+    color=red
+]
+{(abs(x) <= 1) ? 1.5 : 0};
+\end{axis}
+\end{tikzpicture}
+\end{minipage}
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=9cm,
+    axis lines=middle,
+    xmin=-3, xmax=3,
+    ymin=-0.5, ymax=5.0,
+    xlabel={$t$},
+    ylabel={Ampiezza},
+    legend pos=outer north east,
+    legend cell align={left},
+    grid=both,
+    grid style={dashed, gray!30},
+    thick,
+    title={Somma delle componenti $y(t) = y_1(t) + y_2(t)$}
+]
+
+% Componente 1: \Delta (y1)
+\addplot[
+    domain=-2:2, 
+    samples=100, 
+    color=blue, 
+    dashed
+]
+{3 * max(0, 1 - abs(x)/2)};
+\addlegendentry{$y_1(t)$}
+
+% Componente 2: \Pi (y2)
+\addplot[
+    domain=-2:2, 
+    samples=200, 
+    color=red, 
+    dashed
+]
+{(abs(x) <= 1) ? 1.5 : 0};
+\addlegendentry{$y_2(t)$}
+
+% Segnale Originale (y)
+\addplot[
+    domain=-2:2, 
+    samples=200, 
+    color=violet,
+    ultra thick
+]
+{(abs(x) <= 1 ? 1.5 : 0) + 3 * max(0, 1 - abs(x)/2)};
+\addlegendentry{$y(t) = y_1(t) + y_2(t)$}
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Come si evince dai grafici, la somma tra il fronte di discesa di $\Pi$ e la pendenza costante di $\Delta$ in $t = \pm \frac{T_0}{4}$ genera esattamente la discontinuità di ampiezza $\frac{A}{2}$ richiesta dalle specifiche del segnale originale.
+
+\vspace{0.8cm}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\textwidth,
+    height=7cm,
+    axis lines=middle,
+    xmin=-0.12, xmax=0.12,
+    ymin=-0.5, ymax=5.0,
+    xlabel={$t$ (ms)},
+    ylabel={Ampiezza (V)},
+    xtick={-0.08333, -0.04166, 0, 0.04166, 0.08333},
+    xticklabels={$-\frac{1}{12}$, $-\frac{1}{24}$, $0$, $\frac{1}{24}$, $\frac{1}{12}$},
+    scaled x ticks=false,
+    tick label style={font=\footnotesize},
+    grid=both,
+    grid style={dashed, gray!30},
+    thick,
+    title={Segnale $y(t)$ con Parametri Reali ($A=3\text{ V}, T_0=1/6\text{ ms}$)}
+]
+
+% T_0/2 = 1/12 ms. Per ricondurci alla scala normalizzata, valutiamo le funzioni su x*12
+\addplot[
+    domain=-0.1:0.1, 
+    samples=300, 
+    color=violet,
+    ultra thick
+]
+{(abs(x*12) <= 1 ? 1.5 : 0) + 3 * max(0, 1 - abs(x*12))};
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+\section{Sviluppo in Serie di Fourier}
+% 1. Calcolare lo sviluppo in serie di Fourier (ampiezza e fase)
+
+\newpage
+\section{Spettro delle Ampiezze e delle Fasi}
+% 2. Disegnare lo spettro dele ampiezze e delle fasi delle prime 10 armoniche
+
+\newpage
+\section{Ricostruzione e Simulazione Software}
+% 2. Ricostruire attraverso GnuRadio (o altro ambiente sw) il segnale come somma delle prime 10 armoniche del segnale
+\subsection{Sintesi con 10 Armoniche e Verifica nel Tempo}
+% 3. Verificare che il segnare nel tempo restituito da GnuRadio e’ uguale a quello assegnato
+
+\subsection{Verifica dello Spettro}
+% 4. Verificare che lo spettro delle ampiezze restituto da GnuRadio sia uguale a quello calcolato in precedenza
+
+\subsection{Sintesi con 3 Armoniche ed Errore di Troncamento}
+% 5. Ricostruire attraverso GnuRadio il segnale come somma delle prime 3 armoniche e commentare l'errore rispetto a quello con 10 armoniche
+
+\newpage
+\section{Calcolo della Potenza e Banda del Segnale}
+% 7. Calcolare quante armoniche sono necessarie per ricostruire un segnale che abbia una potenza media maggiore del 99,95% di quella del segnale di partenza
+
+\newpage
+\section{Analisi del Segnale Sfasato}
+% 8. Riscrivere l’espressione del segnale sfasato in figura 1 e rifare i punti da 1 a 4
+
+\end{document}
