@@ -1,0 +1,48 @@
+% !TEX root = main.tex
+In virtù della linearità della serie di Fourier, calcoliamo i coefficienti per le due componenti separate sfruttando il profondo legame tra la Trasformata di Fourier di un singolo periodo e i coefficienti dello sviluppo in serie del segnale periodico. Essendo il segnale denominato $y(t)$, indicheremo i coefficienti esponenziali con $Y_k \triangleq A_k e^{j\vartheta_k}$:
+
+\[ Y_k = \frac{1}{T_0} \left. \mathcal{F}\{y_T(t)\} \right|_{f=\frac{k}{T_0}} \]
+dove $y_T(t)$ è il segnale limitato ad un singolo periodo, con $\mathcal{F}\{y_T(t)\} = \mathcal{F}\{y_1(t)\} + \mathcal{F}\{y_2(t)\}$.
+
+Ricordando le trasformate notevoli per l'impulso rettangolare (porta) e triangolare, ed adottando la convenzione normalizzata $\operatorname{sinc}(x) \triangleq \frac{\sin(\pi x)}{\pi x}$:
+\begin{align}
+    \mathcal{F}\left\{ \Pi\left(\frac{t}{T}\right) \right\} &= T \operatorname{sinc}(f T) \\
+    \mathcal{F}\left\{ \Delta\left(\frac{t}{T}\right) \right\} &= T \operatorname{sinc}^2(f T)
+\end{align}
+
+Nel nostro modello, la larghezza fondamentale usata a denominatore è $T = \frac{T_0}{2}$. Applicando le trasformate otteniamo:
+\begin{align}
+    \mathcal{F}\{ y_1(t) \} &= A \left(\frac{T_0}{2}\right) \operatorname{sinc}^2\left(f \frac{T_0}{2}\right) \\
+    \mathcal{F}\{ y_2(t) \} &= \frac{A}{2} \left(\frac{T_0}{2}\right) \operatorname{sinc}\left(f \frac{T_0}{2}\right) = \frac{A T_0}{4} \operatorname{sinc}\left(f \frac{T_0}{2}\right)
+\end{align}
+
+Sostituendo $f = \frac{k}{T_0}$ e ricordando di dividere per $T_0$ secondo la formula dei coefficienti in serie, si arriva all'espressione compatta:
+\begin{equation}
+    Y_k = \frac{1}{T_0} \left[ \frac{A T_0}{2} \operatorname{sinc}^2\left(\frac{k}{2}\right) + \frac{A T_0}{4} \operatorname{sinc}\left(\frac{k}{2}\right) \right] = \frac{A}{2} \operatorname{sinc}^2\left(\frac{k}{2}\right) + \frac{A}{4} \operatorname{sinc}\left(\frac{k}{2}\right) \label{eq:fourier_coeffs}
+\end{equation}
+
+\subsection{Analisi Spezifica dei Coefficienti}
+
+L'espressione \eqref{eq:fourier_coeffs} descrive lo spettro alle varie armoniche. Valutiamola analiticamente nei punti critici per tracciare poi lo spettro delle ampiezze $|Y_k|$ e delle fasi $\vartheta_k = \angle Y_k$.
+
+\paragraph{Componente Continua ($k=0$):}
+Sfruttando il limite notevole $\operatorname{sinc}(0) = 1$:
+\[ Y_0 = \frac{A}{2} + \frac{A}{4} = \frac{3}{4} A \]
+Sostituendo il valore parametrico calcolato $A = 3 \text{ V}$, si deduce che il valore medio del segnale è $Y_0 = 2.25 \text{ V}$. 
+
+\paragraph{Armoniche Pari ($k = 2m \neq 0$):}
+Il termine $\operatorname{sinc}(k/2)$, dipendendo dalla funzione al numeratore $\sin(\pi k / 2)$, presenta uno zero ogni volta che l'argomento del seno è un multiplo intero di $\pi$, il che avviene per ogni indice $k$ pari non nullo. Poiché lo zero si annida sia nel termine quadratico che in quello lineare, le righe spettrali per indici pari sono rigorosamente nulle:
+\[ Y_{2m} = 0 \quad \forall m \in \mathbb{Z} \setminus \{0\} \]
+
+\paragraph{Armoniche Dispari ($k = 2m + 1$):}
+Per gli indici dispari il seno non è mai nullo e assume alternativamente i valori $+1$ e $-1$. Esplicitando la definizione estesa della funzione $\operatorname{sinc}$ troviamo:
+\[ Y_k = \frac{A}{2} \left( \frac{\sin(k\pi/2)}{k\pi/2} \right)^2 + \frac{A}{4} \left( \frac{\sin(k\pi/2)}{k\pi/2} \right) \]
+Semplificando mediante l'identità numerica $\sin^2\left(k\frac{\pi}{2}\right) = 1$ per $k$ dispari, si ottiene l'equazione finale:
+\begin{equation}
+    Y_{2m+1} = \frac{2A}{\pi^2 k^2} + \frac{A}{2 \pi k} \sin\left(k \frac{\pi}{2}\right)
+\end{equation}
+
+\vspace{0.5cm}
+Si evince che i coefficienti $Y_k$ sono \textbf{puramente reali}. Questo era ampiamente previsto, poiché nel primo capitolo è stata dimostrata la parità del segnale $y(t)$ rispetto all'asse delle ordinate. 
+Di conseguenza i coefficienti possono essere scritti nella forma polare $Y_k \triangleq A_k e^{j\vartheta_k}$. 
+Poiché la parte immaginaria è strutturalmente nulla ($\Im\{Y_k\}=0$), lo spettro di fase $\vartheta_k$ assumerà esclusivamente due valori: $0$ (se $Y_k > 0$) oppure $\pm \pi$ qualora il coefficiente risulti negativo ($Y_k < 0$).
