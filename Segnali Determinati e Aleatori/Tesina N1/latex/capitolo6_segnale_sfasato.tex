@@ -1,1 +1,19 @@
-% Inserisci qui il contenuto per questo capitolo
+% !TEX root = main.tex
+Consideriamo un ritardo temporale $t_0$ applicato al segnale originario:
+\begin{equation}
+    y_{s}(t) = y(t - t_0)
+\end{equation}
+Tramite la proprietà di traslazione nel tempo, i coefficienti $Y'_k$ del nuovo segnale sono:
+\begin{equation}
+    Y'_k = Y_k \cdot e^{-j 2\pi k f_0 t_0}
+\end{equation}
+
+\subsection{Variazioni dello Spettro}
+Il modulo dello spettro rimane inalterato, in quanto $|e^{-j 2\pi k f_0 t_0}| = 1$:
+\[ |Y'_k| = |Y_k| \]
+Ne consegue che una traslazione temporale non modifica la densità spettrale di potenza o l'energia associata alle singole armoniche.
+L'effetto si manifesta esclusivamente sullo spettro di fase $\vartheta_k$, che subisce uno sfasamento lineare proporzionale alla frequenza $f_k = k f_0$:
+\[ \vartheta'_k = \vartheta_k - 2\pi k f_0 t_0 \pmod{2\pi} \]
+
+\subsection{Conclusioni}
+In sintesi, i risultati ottenuti identificano una banda di occupazione energetica $B_{99\%} = 18$ kHz, mentre il ritardo temporale $t_0$ introduce esclusivamente uno sfasamento lineare $\triangle\vartheta_k = -2\pi k f_0 t_0$ mantenendo inalterato lo spettro d'ampiezza.
