@@ -1,22 +1,33 @@
 % !TEX root = main.tex
-Il segnale $y(t)$ assegnato è un segnale di potenza. La potenza media $P_y$ è calcolabile nel dominio del tempo tramite il suo integrale quadratico su un periodo $T_0$.
+Il segnale $y(t)$ assegnato è un segnale di potenza. La potenza media $P_y$ è calcolata nel dominio del tempo tramite l'integrale quadratico su un periodo $T_0$.
 
-Normalizzando l'asse con $x = \frac{2t}{T_0}$ (con $dt = \frac{T_0}{2}dx$), l'integrale risulta:
-\[ P_y = 2 \int_{0}^{0.5} [3(1-x) + 1.5]^2\, dx + 2 \int_{0.5}^{1} [3(1-x)]^2\, dx \]
-\[ P_y = \left[ -\frac{(4.5 - 3x)^3}{9} \right]_0^{0.5} + \left[ -\frac{(3 - 3x)^3}{9} \right]_{0.5}^1 = \frac{64.125}{9} + \frac{3.375}{9} = \textbf{7.5 V}^2 \]
+Normalizzando con $x = \frac{2t}{T_0}$ e spezzando il dominio in due intervalli (dove il rettangolo si annulla per $x > 0.5$):
+\[ P_y = 2 \int_{0}^{0.5} (4.5 - 3x)^2\, dx + 2\int_{0.5}^{1} (3 - 3x)^2\, dx = \frac{64.125}{9} + \frac{3.375}{9} = \mathbf{7.5 \text{ V}^2} \]
 
-La potenza media dissipata su un carico unitario è di $\mathbf{7.5 \text{ W}}$.
+\subsection{Banda al 99.95\% della Potenza}
+La banda essenziale è definita come la frequenza $B$ oltre la quale la potenza residua è inferiore allo $0.05\%$ del totale. Sommando la potenza delle righe spettrali $|Y_k|^2$ in modo cumulativo:
 
-\subsection{Occupazione in Banda al 99\%}
-Definiamo la banda essenziale come la soglia di frequenza che racchiude il 99\% della potenza totale calcolata. Sommando la potenza delle singole righe armoniche $|Y_k|^2$:
-\begin{itemize}
-    \item \textbf{DC ($k=0$):} $P_{DC} = (2.25)^2 = 5.0625 \text{ V}^2$
-    \item \textbf{Frequenza $f_1$ (6 kHz):} $P_{1} = 2 \times (1.0854)^2 \approx 2.356 \text{ V}^2$
-    \item \textbf{Frequenza $f_3$ (18 kHz):} $P_{3} = 2 \times (0.091)^2 \approx 0.016 \text{ V}^2$
-\end{itemize}
+\begin{center}
+\begin{tabular}{cccc}
+    \hline
+    Armoniche incluse & $k_{\max}$ & $f_{\max}$ [kHz] & \% Potenza cumulativa \\
+    \hline
+    DC                & 0  & 0   & 67.50\% \\
+    DC + $k=1$        & 1  & 6   & 98.92\% \\
+    + $k=3$           & 3  & 18  & 99.14\% \\
+    + $k=5$           & 5  & 30  & 99.52\% \\
+    + $k=7$           & 7  & 42  & 99.61\% \\
+    + $k=9$           & 9  & 54  & 99.70\% \\
+    + $k=11$          & 11 & 66  & 99.74\% \\
+    + $k=13$          & 13 & 78  & 99.79\% \\
+    + $k=19$          & 19 & 114 & 99.85\% \\
+    + $k=29$          & 29 & 174 & 99.90\% \\
+    + $k=39$          & 39 & 234 & 99.93\% \\
+    + $k=49$          & 49 & 294 & 99.94\% \\
+    + $k=59$          & 59 & 354 & \textbf{99.95\%} \\
+    \hline
+\end{tabular}
+\end{center}
 
-Verifichiamo la potenza cumulativa:
-\[ \frac{P_{DC} + P_1}{P_{tot}} = \frac{7.418}{7.5} = 98.9\% \]
-\[ \frac{P_{DC} + P_1 + P_3}{P_{tot}} = \frac{7.434}{7.5} = 99.1\% \]
-
-La soglia del 99\% viene superata alla terza armonica, identificando una banda di occupazione pari a $\boxed{B_{99\%} = 18 \text{ kHz}}$.
+Il lento avvicinamento alla soglia è conseguenza diretta del decadimento a $1/k$ dello spettro, dovuto alla discontinuità del rettangolo. La banda al $99.95\%$ corrisponde a:
+\[ \boxed{B_{99.95\%} = 59\, f_0 = 59 \times 6 \text{ kHz} = 354 \text{ kHz}} \]

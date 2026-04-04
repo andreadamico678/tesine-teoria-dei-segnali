@@ -3,13 +3,14 @@ I coefficienti $Y_k$ permettono di ricostruire il segnale nel tempo tramite la f
 \begin{equation}
     y_{rec}(t) = Y_0 + 2 \sum_{k=1}^{N} |Y_k| \cos(2\pi k f_0 t + \vartheta_k)
 \end{equation}
-Per l'analisi software, limitiamo la serie alle prime armoniche ($k=0, 1, 3, 5, 7, 9$). In corrispondenza dei salti bruschi, il segnale ricostruito rispetta le condizioni di Dirichlet, convergendo al valor medio del salto, ma introducendo oscillazioni locali (fenomeno di Gibbs) con un errore di picco costante di circa il 9\%.
+Le prime 10 armoniche ($k = 1, \dots, 10$) includono solo cinque componenti non nulle (quelle dispari: $k=1,3,5,7,9$), poiché tutte le armoniche pari si annullano per la proprietà dimostrata in sez. 2. In corrispondenza dei salti bruschi, il segnale ricostruito converge al valor medio del salto (condizioni di Dirichlet), ma introduce oscillazioni locali (Fenomeno di Gibbs) con errore di picco costante di circa il 9\%.
 
 \begin{center}
     \begin{tabular}{ccc}
         \hline
         $k$ & Frequenza [kHz] & Ampiezza $2|Y_k|$ [V] \\
         \hline
+        0   & 0               & $2.2500$ (DC)         \\
         1   & 6               & $+2.1708$             \\
         3   & 18              & $-0.1833$             \\
         5   & 30              & $+0.2396$             \\
@@ -19,19 +20,52 @@ Per l'analisi software, limitiamo la serie alle prime armoniche ($k=0, 1, 3, 5, 
     \end{tabular}
 \end{center}
 
-\subsection{Note implementative in GNU Radio}
-Il segnale ricostruito è stato simulato su \textit{GNU Radio} sommando le sorgenti sinusoidali a una costante DC ($2.25$ V). Per stabilizzare la visualizzazione nel blocco \texttt{QT GUI Time Sink} ed evitare che la traccia scorra continuamente a schermo (\textit{free run}), è stato configurato un trigger di tipo \texttt{Normal} (in alternativa si può usare \texttt{Auto}) con un livello di soglia impostato a $2.25$ V (pari alla componente media). Questo permette di agganciare il fronte di salita della ricostruzione rendendo la simulazione leggibile.
+\subsection{Verifica sul dominio del tempo (Time Sink)}
+Il segnale ricostruito è stato simulato su \textit{GNU Radio} sommando le sorgenti sinusoidali a una costante DC ($2.25$ V) tramite un blocco \texttt{Add}. Per stabilizzare la visualizzazione nel blocco \texttt{QT GUI Time Sink} ed evitare che la traccia scorresse a schermo (\textit{free run}), è stato configurato un trigger di tipo \texttt{Normal} con livello di soglia $2.25$ V (pari alla componente media). La sample rate è stata impostata a $200\,000$ Hz per rispettare il criterio di Nyquist rispetto all'armonica più alta ($9 f_0 = 54$ kHz).
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.65\textwidth]{media/gnuradio_flowgraph.png}
-    \caption{Flowgraph in GNU Radio per la sintesi del segnale $y_{rec}(t)$}
+    \caption{Flowgraph in GNU Radio: 6 sorgenti (DC + 5 armoniche) collegate ad Add $\rightarrow$ Time Sink}
     \label{fig:gnuradio_flowgraph}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth]{media/gnuradio_output.png}
-    \caption{Output del QT GUI Time Sink con trigger attivo}
+    \includegraphics[width=0.8\textwidth]{media/gnuradio_output.png}
+    \caption{Output del QT GUI Time Sink: ricostruzione con le prime 10 armoniche ($N=10$)}
     \label{fig:gnuradio_output}
+\end{figure}
+
+\subsection{Verifica spettrale (Frequency Sink)}
+Per verificare che le componenti in frequenza corrispondano agli spettri calcolati nel Cap.~3, l'uscita del blocco \texttt{Add} è stata collegata anche a un \texttt{QT GUI Frequency Sink}. La visualizzazione in scala lineare deve mostrare righe spettrali in corrispondenza dei valori $\{0, 6, 18, 30, 42, 54\}$ kHz, con altezze proporzionali agli $|Y_k|$ della tabella. Le righe alle frequenze pari (12, 24, 36, 48, 60 kHz) devono risultare assenti.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/gnuradio_fft.png}
+    \caption{Output del QT GUI Frequency Sink: verifica dello spettro delle ampiezze}
+    \label{fig:gnuradio_fft}
+\end{figure}
+
+\subsection{Confronto: 3 armoniche vs 10 armoniche}
+Per apprezzare l'effetto della troncatura, si confronta la ricostruzione con le prime 3 armoniche ($k=1,2,3$, di cui solo $k=1$ e $k=3$ non nulle) contro quella con le prime 10. Nel primo caso vengono escluse le componenti ad alta frequenza che modellano i dettagli del salto, rendendo l'errore di ricostruzione visivamente più evidente.
+
+\begin{center}
+    \begin{tabular}{lcc}
+        \hline
+        Ricostruzione & Armoniche usate & Errore visivo                  \\
+        \hline
+        3 armoniche   & $k=0,1,3$       & Ripple ampio, forma "morbida"  \\
+        10 armoniche  & $k=0,1,3,5,7,9$ & Ripple ridotto, sagoma precisa \\
+        \hline
+    \end{tabular}
+\end{center}
+
+Con sole 3 armoniche, su GNU Radio basta tenere attivi solo i blocchi per $k=1$ (Amp: $2.1708$) e $k=3$ (Amp: $-0.1833$) più il DC, disabilitando gli altri. Il confronto visuale tra i due Time Sink conferma che il Fenomeno di Gibbs è peggiorato dall'overshoot più pronunciato al cambio di livello, mentre la forma complessiva del segnale già si delinea correttamente.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/gnuradio_confronto.png}
+    \caption{Confronto visuale: ricostruzione con 3 armoniche (sopra) vs 10 armoniche (sotto)}
+    \label{fig:confronto}
 \end{figure}

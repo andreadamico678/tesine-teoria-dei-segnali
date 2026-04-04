@@ -1,19 +1,74 @@
 % !TEX root = main.tex
-Consideriamo un ritardo temporale $t_0$ applicato al segnale originario:
+Il segnale sfasato è definito come $y_s(t) = y(t - t_0)$, dove il ritardo è specificato dalla consegna:
 \begin{equation}
-    y_{s}(t) = y(t - t_0)
-\end{equation}
-Tramite la proprietà di traslazione nel tempo, i coefficienti $Y'_k$ del nuovo segnale sono:
-\begin{equation}
-    Y'_k = Y_k \cdot e^{-j 2\pi k f_0 t_0}
+    t_0 = \frac{T_0}{N} = \frac{T_0}{6} = \frac{1}{36}\text{ ms} \approx 27.78\,\mu\text{s}
 \end{equation}
 
-\subsection{Variazioni dello Spettro}
-Il modulo dello spettro rimane inalterato, in quanto $|e^{-j 2\pi k f_0 t_0}| = 1$:
+Tramite la proprietà di traslazione nel tempo, i coefficienti $Y'_k$ del segnale ritardato sono:
+\begin{equation}
+    Y'_k = Y_k \cdot e^{-j 2\pi k f_0 t_0} = Y_k \cdot e^{-j 2\pi k \frac{f_0}{N}} = Y_k \cdot e^{-j\frac{\pi k}{3}}
+\end{equation}
+Lo sfasamento introdotto per ciascuna armonica è $\Delta\varphi_k = -\frac{\pi k}{3}$ (rad).
+
+\subsection{Spettro delle Ampiezze: Invarianza}
+Il modulo dei nuovi coefficienti è identico all'originale, poiché $|e^{-j\pi k/3}| = 1$:
 \[ |Y'_k| = |Y_k| \]
-Ne consegue che una traslazione temporale non modifica la densità spettrale di potenza o l'energia associata alle singole armoniche.
-L'effetto si manifesta esclusivamente sullo spettro di fase $\vartheta_k$, che subisce uno sfasamento lineare proporzionale alla frequenza $f_k = k f_0$:
-\[ \vartheta'_k = \vartheta_k - 2\pi k f_0 t_0 \pmod{2\pi} \]
+Lo spettro delle ampiezze del segnale sfasato coincide con quello del Cap.~3.
+
+\subsection{Spettro delle Fasi: Effetto del Ritardo}
+La fase dei nuovi coefficienti (calcolata come $\vartheta'_k = \vartheta_k + \Delta\varphi_k \pmod{2\pi}$, riportata nell'intervallo $[-\pi, \pi]$) risulta:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $k$ & $\vartheta_k$ orig. [rad] & $\Delta\varphi_k = -\pi k/3$ [rad] & $\vartheta'_k$ [rad] & Ampiezza $2|Y_k|$ [V] \\
+        \hline
+        0   & $0$                       & $0$                                & $0$                  & $2.2500$              \\
+        1   & $0$                       & $-\pi/3$                           & $-\pi/3$             & $2.1708$              \\
+        3   & $\pi$                     & $-\pi$                             & $0$                  & $0.1833$              \\
+        5   & $0$                       & $-5\pi/3$                          & $+\pi/3$             & $0.2396$              \\
+        7   & $\pi$                     & $-7\pi/3$                          & $+2\pi/3$            & $0.1116$              \\
+        9   & $0$                       & $-3\pi$                            & $\pi$                & $0.1211$              \\
+        \hline
+    \end{tabular}
+    \caption{Spettro di fase del segnale sfasato $y_s(t) = y(t - T_0/6)$}
+\end{table}
+
+A differenza del segnale originale (dove la fase era sempre $0$ o $\pi$), il ritardo introduce sfasamenti intermedi multipli di $\pi/3$. La progressione lineare della fase con $k$ è la firma caratteristica di un ritardo puro.
+
+\subsection{Ricostruzione del Segnale Sfasato in GNU Radio}
+Poiché le ampiezze sono invariate, il flowgraph può essere adattato modificando esclusivamente il parametro \texttt{Phase Offset} di ciascun blocco \texttt{Signal Source}:
+
+\begin{center}
+    \begin{tabular}{cccc}
+        \hline
+        $k$ & Frequenza [kHz] & Ampiezza [V] & Phase Offset [rad]       \\
+        \hline
+        1   & 6               & $+2.1708$    & $-\pi/3 \approx -1.047$  \\
+        3   & 18              & $+0.1833$    & $0$                      \\
+        5   & 30              & $+0.2396$    & $+\pi/3 \approx +1.047$  \\
+        7   & 42              & $+0.1116$    & $+2\pi/3 \approx +2.094$ \\
+        9   & 54              & $-0.1211$    & $0$                      \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\textit{Nota:} L'assorbimento del segno negativo nell'ampiezza equivale a un Phase Offset di $\pi$. Nella tabella sopra le ampiezze sono tutte positive e lo sfasamento di $\pi$ è già incluso nel Phase Offset ($\vartheta'_k$ già calcolato nella tabella precedente).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/gnuradio_sfasato_time.png}
+    \caption{Time Sink: confronto tra $y(t)$ e $y_s(t)$ con ritardo $T_0/6$}
+    \label{fig:sfasato_time}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{media/gnuradio_sfasato_fft.png}
+    \caption{Frequency Sink del segnale sfasato: le ampiezze coincidono con quelle del segnale originale}
+    \label{fig:sfasato_fft}
+\end{figure}
 
 \subsection{Conclusioni}
-In sintesi, i risultati ottenuti identificano una banda di occupazione energetica $B_{99\%} = 18$ kHz, mentre il ritardo temporale $t_0$ introduce esclusivamente uno sfasamento lineare $\triangle\vartheta_k = -2\pi k f_0 t_0$ mantenendo inalterato lo spettro d'ampiezza.
+La banda al 99.95\% è $B_{99.95\%} = 354$ kHz ($k=59$). Il ritardo $t_0 = T_0/6$ lascia invariato lo spettro di ampiezza e introduce uno sfasamento lineare $\vartheta'_k = \vartheta_k - \pi k/3$ sulle fasi, visibile nel Time Sink come una traslazione orizzontale del segnale pari a $t_0 = 27.78\,\mu\text{s}$.
