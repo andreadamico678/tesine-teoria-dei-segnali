@@ -1,11 +1,7 @@
 % !TEX root = main.tex
 \section{Introduzione e Modello Analitico}
 
-L'obiettivo di questa relazione è l'analisi in frequenza e la successiva sintesi del segnale periodico $y(t)$ assegnato. Al fine di semplificare il calcolo dei coefficienti dello sviluppo in serie di Fourier, risulta conveniente sfruttare la linearità dell'operatore trasformata e scomporre il segnale in componenti elementari note.
-
-Osservando l'andamento del segnale in un singolo periodo $T_0$, e centrando l'asse dei tempi, è possibile modellare $y(t)$ come la sovrapposizione lineare di $y_1(t)$ (segnale $\Delta$) e $y_2(t)$ (segnale $\Pi$).
-
-Questo è il modo più efficiente di calcolare le caratteristiche del segnale, in quanto le proprietà delle funzioni $\Delta$ e $\Pi$ sono già note.
+Osservando l'andamento del segnale in un singolo periodo $T_0$, e centrando l'asse dei tempi, e possibile modellare $y(t)$ come la sovrapposizione lineare di $y_1(t)$ (segnale $\Delta$) e $y_2(t)$ (segnale $\Pi$). Sfruttando la linearità dell'operatore trasformata e le proprietà di queste due funzioni, il calcolo della serie risulta notevolmente semplificato.
 
 I parametri calcolati a partire dal numero di lettere del cognome ("D'Amico" $\rightarrow N=6$) sono:
 \begin{itemize}
@@ -13,7 +9,7 @@ I parametri calcolati a partire dal numero di lettere del cognome ("D'Amico" $\r
     \item $T_0 = \frac{1}{N} \text{ ms} = \frac{1}{6} \text{ ms}$
 \end{itemize}
 
-L'espressione analitica nel periodo $t \in \left[-\frac{T_0}{2}, \frac{T_0}{2}\right]$ risulta essere:
+L'espressione nel periodo $t \in \left[-\frac{T_0}{2}, \frac{T_0}{2}\right]$ risulta essere:
 \begin{equation}
     y(t) = y_1(t) + y_2(t) = A \cdot \Delta\left(\frac{t}{T_0/2}\right) + \frac{A}{2} \Pi\left(\frac{t}{T_0/2}\right)
 \end{equation}

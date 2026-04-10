@@ -8,26 +8,26 @@ Normalizzando con $x = \frac{2t}{T_0}$ e spezzando il dominio in due intervalli 
 La banda essenziale è definita come la frequenza $B$ oltre la quale la potenza residua è inferiore allo $0.05\%$ del totale. Sommando la potenza delle righe spettrali $|Y_k|^2$ in modo cumulativo:
 
 \begin{center}
-\begin{tabular}{cccc}
-    \hline
-    Armoniche incluse & $k_{\max}$ & $f_{\max}$ [kHz] & \% Potenza cumulativa \\
-    \hline
-    DC                & 0  & 0   & 67.50\% \\
-    DC + $k=1$        & 1  & 6   & 98.92\% \\
-    + $k=3$           & 3  & 18  & 99.14\% \\
-    + $k=5$           & 5  & 30  & 99.52\% \\
-    + $k=7$           & 7  & 42  & 99.61\% \\
-    + $k=9$           & 9  & 54  & 99.70\% \\
-    + $k=11$          & 11 & 66  & 99.74\% \\
-    + $k=13$          & 13 & 78  & 99.79\% \\
-    + $k=19$          & 19 & 114 & 99.85\% \\
-    + $k=29$          & 29 & 174 & 99.90\% \\
-    + $k=39$          & 39 & 234 & 99.93\% \\
-    + $k=49$          & 49 & 294 & 99.94\% \\
-    + $k=59$          & 59 & 354 & \textbf{99.95\%} \\
-    \hline
-\end{tabular}
+    \begin{tabular}{cccc}
+        \hline
+        Armoniche incluse & $k_{\max}$ & $f_{\max}$ [kHz] & \% Potenza cumulativa \\
+        \hline
+        DC                & 0          & 0                & 67.50\%               \\
+        DC + $k=1$        & 1          & 6                & 98.92\%               \\
+        + $k=3$           & 3          & 18               & 99.14\%               \\
+        + $k=5$           & 5          & 30               & 99.52\%               \\
+        + $k=7$           & 7          & 42               & 99.61\%               \\
+        + $k=9$           & 9          & 54               & 99.70\%               \\
+        + $k=11$          & 11         & 66               & 99.74\%               \\
+        + $k=13$          & 13         & 78               & 99.79\%               \\
+        + $k=19$          & 19         & 114              & 99.85\%               \\
+        + $k=29$          & 29         & 174              & 99.90\%               \\
+        + $k=39$          & 39         & 234              & 99.93\%               \\
+        + $k=49$          & 49         & 294              & 99.94\%               \\
+        + $k=59$          & 59         & 354              & \textbf{99.95\%}      \\
+        \hline
+    \end{tabular}
 \end{center}
 
-Il lento avvicinamento alla soglia è conseguenza diretta del decadimento a $1/k$ dello spettro, dovuto alla discontinuità del rettangolo. La banda al $99.95\%$ corrisponde a:
+Il lento avvicinamento alla soglia è conseguenza diretta del decadimento a $1/k$ dello spettro, che rende la convergenza lenta a causa della discontinuità del rettangolo. La banda al $99.95\%$ corrisponde a:
 \[ \boxed{B_{99.95\%} = 59\, f_0 = 59 \times 6 \text{ kHz} = 354 \text{ kHz}} \]

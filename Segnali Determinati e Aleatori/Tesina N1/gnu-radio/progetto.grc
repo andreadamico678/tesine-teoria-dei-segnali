@@ -224,7 +224,7 @@ blocks:
     alias: ''
     amp: '0.1211'
     comment: ''
-    freq: '52000'
+    freq: '54000'
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
@@ -247,7 +247,7 @@ blocks:
     alias: ''
     amp: '-0.1211'
     comment: ''
-    freq: '52000'
+    freq: '54000'
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
@@ -425,7 +425,7 @@ blocks:
     bus_structure: null
     coordinate: [1320, 544.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_freq_sink_x_0_0
   id: qtgui_freq_sink_x
   parameters:
@@ -506,7 +506,7 @@ blocks:
     bus_structure: null
     coordinate: [2352, 568.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -603,7 +603,7 @@ blocks:
     bus_structure: null
     coordinate: [1320, 392.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: qtgui_time_sink_x_0_1
   id: qtgui_time_sink_x
   parameters:
@@ -700,7 +700,7 @@ blocks:
     bus_structure: null
     coordinate: [2352, 408.0]
     rotation: 0
-    state: disabled
+    state: enabled
 
 connections:
 - [analog_const_source_x_0, '0', blocks_add_xx_0, '0']

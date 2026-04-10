@@ -3,7 +3,7 @@
 *.fdb_latexmk
 *.fls
 *.log
-*.synctex.gz
+*.synctex*
 *.toc
 *.out
 *.bbl
@@ -56,3 +56,15 @@ Thumbs.db
 # --- Wireshark ---
 *.csv
 *.pcapng
+
+# --- Project Specifics ---
+*extracted*
+*extract*
+*delete-later*
+*busy*
+repo_info.tex
+argomenti.tex
+test.grc
+*.grc~
+*.bak
+*.tmp

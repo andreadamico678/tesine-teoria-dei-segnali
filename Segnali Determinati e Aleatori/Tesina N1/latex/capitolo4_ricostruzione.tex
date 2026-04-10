@@ -21,7 +21,7 @@ Le prime 10 armoniche ($k = 1, \dots, 10$) includono solo cinque componenti non 
 \end{center}
 
 \subsection{Verifica sul dominio del tempo (Time Sink)}
-Il segnale ricostruito è stato simulato su \textit{GNU Radio} sommando le sorgenti sinusoidali a una costante DC ($2.25$ V) tramite un blocco \texttt{Add}. Per stabilizzare la visualizzazione nel blocco \texttt{QT GUI Time Sink} ed evitare che la traccia scorresse a schermo (\textit{free run}), è stato configurato un trigger di tipo \texttt{Normal} con livello di soglia $2.25$ V (pari alla componente media). La sample rate è stata impostata a $200\,000$ Hz per rispettare il criterio di Nyquist rispetto all'armonica più alta ($9 f_0 = 54$ kHz).
+La ricostruzione su GNU Radio è stata fatta tramite un blocco \texttt{Add}. Per stabilizzare la traccia nel \texttt{Time Sink} è stato usato un trigger \texttt{Normal} a $2.25$ V. La sample rate è $200$ kHz, sufficiente per l'armonica a $54$ kHz.
 
 \begin{figure}[h]
     \centering

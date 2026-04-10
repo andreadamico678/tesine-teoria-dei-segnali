@@ -22,21 +22,21 @@ Passando alle frequenze discrete $f = \frac{k}{T_0}$ e ricordando di dividere pe
 \end{equation}
 
 \subsection{Analisi dei Coefficienti}
-L'espressione \eqref{eq:fourier_coeffs} descrive lo spettro del segnale. Ne analizziamo l'andamento per tracciare gli spettri dell'ampiezza $|Y_k|$ e della fase $\vartheta_k$.
+L'espressione \eqref{eq:fourier_coeffs} definisce lo spettro del segnale. Analizziamo l'andamento per ricavare ampiezza $|Y_k|$ e fase $\vartheta_k$.
 
 \paragraph{Componente Continua ($k=0$):}
 Sfruttando il fatto che $\operatorname{sinc}(0) = 1$:
 \[ Y_0 = \frac{A}{2} + \frac{A}{4} = \frac{3}{4} A = 2.25 \text{ V} \]
 
 \paragraph{Armoniche Pari ($k = 2m \neq 0$):}
-Il numeratore delle funzioni $\operatorname{sinc}(k/2)$ contiene il termine $\sin(\pi k / 2)$, che vale sempre zero ogniqualvolta $k$ è un numero pari. Di conseguenza, tutte le armoniche pari si annullano:
+Il numeratore delle funzioni $\operatorname{sinc}(k/2)$ contiene il termine $\sin(\pi k / 2)$, che vale sempre zero ogni volta che $k$ è pari. Quindi tutte le armoniche pari si annullano:
 \[ Y_{2m} = 0 \quad \forall m \in \mathbb{Z} \setminus \{0\} \]
 
 \paragraph{Armoniche Dispari ($k = 2m + 1$):}
-Per gli indici dispari, possiamo espandere la funzione $\operatorname{sinc}$ limitandoci a calcolare il seno a numeratore:
+Per gli indici dispari, possiamo espandere la funzione $\operatorname{sinc}$ e calcolare il valore a numeratore:
 \begin{equation}
     Y_{2m+1} = \frac{2A}{\pi^2 k^2} + \frac{A}{2 \pi k} \sin\left(k \frac{\pi}{2}\right)
 \end{equation}
 
 \vspace{0.5cm}
-Questa analisi conferma che i coefficienti $Y_k$ sono interamente reali ($\Im\{Y_k\}=0$), pertanto lo spettro di fase $\vartheta_k$ assume solo i valori $0$ o $\pm \pi$ in base al segno algebrico del coefficiente calcolato.
+I coefficienti $Y_k$ sono interamente reali, quindi lo spettro di fase $\vartheta_k$ può assumere solo i valori $0$ o $\pi$ (a seconda del segno del valore calcolato).

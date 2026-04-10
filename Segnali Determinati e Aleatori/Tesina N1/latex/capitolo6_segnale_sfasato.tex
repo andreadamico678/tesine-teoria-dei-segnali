@@ -35,15 +35,15 @@ La fase dei nuovi coefficienti (calcolata come $\vartheta'_k = \vartheta_k + \De
     \caption{Spettro di fase del segnale sfasato $y_s(t) = y(t - T_0/6)$}
 \end{table}
 
-A differenza del segnale originale (dove la fase era sempre $0$ o $\pi$), il ritardo introduce sfasamenti intermedi multipli di $\pi/3$. La progressione lineare della fase con $k$ è la firma caratteristica di un ritardo puro.
+Il ritardo introduce sfasamenti che dipendono linearmente da $k$, come tipico di una traslazione temporale pura.
 
 \subsection{Ricostruzione del Segnale Sfasato in GNU Radio}
-Poiché le ampiezze sono invariate, il flowgraph può essere adattato modificando esclusivamente il parametro \texttt{Phase Offset} di ciascun blocco \texttt{Signal Source}:
+Poiché le ampiezze sono invariate, il flowgraph può essere adattato modificando esclusivamente il parametro \texttt{Initial Phase} di ciascun blocco \texttt{Signal Source}:
 
 \begin{center}
     \begin{tabular}{cccc}
         \hline
-        $k$ & Frequenza [kHz] & Ampiezza [V] & Phase Offset [rad]       \\
+        $k$ & Frequenza [kHz] & Ampiezza [V] & Initial Phase [rad]       \\
         \hline
         1   & 6               & $+2.1708$    & $-\pi/3 \approx -1.047$  \\
         3   & 18              & $+0.1833$    & $0$                      \\
@@ -54,7 +54,7 @@ Poiché le ampiezze sono invariate, il flowgraph può essere adattato modificand
     \end{tabular}
 \end{center}
 
-\textit{Nota:} L'assorbimento del segno negativo nell'ampiezza equivale a un Phase Offset di $\pi$. Nella tabella sopra le ampiezze sono tutte positive e lo sfasamento di $\pi$ è già incluso nel Phase Offset ($\vartheta'_k$ già calcolato nella tabella precedente).
+\textit{Nota:} L'assorbimento del segno negativo nell'ampiezza equivale a un Initial Phase di $\pi$. Nella tabella sopra le ampiezze sono tutte positive e lo sfasamento di $\pi$ è già incluso nel parametro \texttt{Initial Phase} ($\vartheta'_k$ già calcolato nella tabella precedente).
 
 \begin{figure}[h]
     \centering
